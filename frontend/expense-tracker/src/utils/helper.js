@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export const validateEmail = (email) => {
     const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return regex.test(email);
@@ -23,4 +25,41 @@ export const addThousandsSeparator = (num) => {
     const [integerPart, fractionalPart] = num.toString().split(".");
     const formattedIntegerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return fractionalPart ? `${formattedIntegerPart}.${fractionalPart}` : formattedIntegerPart;
+}
+
+export const prepareExpenseBarChartData = (data = []) => {
+    const sortedData = [...data].sort((a, b) => new Date(a.date) - new Date(b.date));
+    
+    const charData = sortedData.map((item) => ({
+        month: moment(item?.date).format("Do MMM"),
+        amount: item?.amount,
+        category: item?.category
+    }))
+
+    return charData;
+}
+
+export const prepareIncomeBarChartData = (data = []) => {
+    const sortedData = [...data].sort((a, b) => new Date(a.date) - new Date(b.date));
+
+    const charData = sortedData.map((item) => ({
+        month: moment(item?.date).format("Do MMM"),
+        amount: item?.amount,
+        source: item?.source,
+        
+    }))
+    
+    return charData;
+}
+
+export const prepareExpenseLineChartData = (data = []) => {
+    const sortedData = [...data].sort((a, b) => new Date(a.date) - new Date(b.date));
+
+    const charData = sortedData.map((item) => ({
+        month: moment(item?.date).format("Do MMM"),
+        amount: item?.amount,
+        category: item?.category,
+    }))
+    
+    return charData;
 }
