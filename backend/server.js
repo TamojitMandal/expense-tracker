@@ -8,7 +8,7 @@ const authRoutes = require("./routes/authRoutes");
 const incomeRoutes = require("./routes/incomeRoutes");
 const expenseRoutes = require("./routes/expenseRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
-const fileToURLPath = require("url");
+const fileURLToPath = require("url");
 
 const app = express();
 
