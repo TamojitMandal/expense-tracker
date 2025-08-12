@@ -8,6 +8,7 @@ const authRoutes = require("./routes/authRoutes");
 const incomeRoutes = require("./routes/incomeRoutes");
 const expenseRoutes = require("./routes/expenseRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
+const fileToURLPath = require("url");
 
 const app = express();
 
@@ -21,6 +22,10 @@ app.use(
 );
 
 app.use(express.json());
+
+// Required in ES Modules to simulate __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 connectDB();
 
